@@ -7,6 +7,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -37,7 +38,12 @@ class UserController extends Controller
     public function read()
     {
         if (request()->user()->hasRole('Admin')) {
-            $data = User::all();
+            // $data = User::all();
+            $data =  DB::table('role_users')
+                ->join('users', 'users.id', '=', 'role_users.user_id')
+                ->join('roles', 'roles.id', '=', 'role_users.role_id')
+                ->select('users.*', 'roles.name as role')
+                ->get();
             return view('/admin/read')->with([
                 'data' => $data
             ]);
