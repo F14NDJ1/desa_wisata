@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <!-- Icons -->
     <link rel="stylesheet" href="../../../assets/vendor/nucleo/css/nucleo.css" type="text/css">
-    <link rel="stylesheet" href="../../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="../../../assets/vendor/fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../../../assets/css/argon.css?v=1.1.0" type="text/css">
 
@@ -27,10 +27,10 @@
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                          <!-- Validation Errors -->
-                            @if(session()->get('errors'))
-                                <div class="alert alert-danger col-lg-6" role="alert"  :errors="$errors">
-                                {{session()->get('errors')}}
+                            <!-- Validation Errors -->
+                            @if (session()->get('errors'))
+                                <div class="alert alert-danger col-lg-6" role="alert" :errors="$errors">
+                                    {{ session()->get('errors') }}
                                 </div>
                             @endif
                         </div>
