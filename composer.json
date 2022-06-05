@@ -13,7 +13,8 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "spatie/laravel-medialibrary": "10.0.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -59,7 +60,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": false
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

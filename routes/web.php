@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentKindController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,3 +71,4 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/tes', function () {
     return view('editor');
 });
+Route::post('/store/image', [ImageController::class, 'store']);
