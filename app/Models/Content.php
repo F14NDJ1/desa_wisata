@@ -12,15 +12,14 @@ class Content extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
+    // public function registerMediaConversions(Media $media = null): void
+    // {
+    //     $this->addMediaConversion('thumb')
+    //         ->width(368)
+    //         ->height(232)
+    //         ->sharpen(10);
+    // }
 
-    // protected $fillable = [
-    //             'name_content',
-    //             'content_kind_id',
-    //             'user_id',
-    //             'url' ,
-    //             'content' ,
-    //             'thumbnail'
-    // ];
     protected $guarded = ['id'];
     protected $primaryKey = 'id';
 

@@ -48,9 +48,14 @@
     <!-- Argon JS -->
     <script src="{{ asset('assets/js/argon.js?v=1.1.0') }}"></script>
     <!-- Demo JS - remove this in your project -->
+
     <script src="{{ asset('assets/js/demo.min.js') }}"></script>
-    {{-- <script src="{{ asset('assets/vendor/quill/dist/quill.min.js"></script> --}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> --}}
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script> --}}
+
+    <script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
+    {{-- <script src="https://cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script> --}}
+
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">

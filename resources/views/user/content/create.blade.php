@@ -161,11 +161,14 @@
         };
     }
 
+
     ClassicEditor
         .create(document.querySelector('#content'), {
             extraPlugins: [MyCustomUploadAdapterPlugin],
-
         })
+
+
+    // CKEDITOR.replace('content');
 </script>
 
 
