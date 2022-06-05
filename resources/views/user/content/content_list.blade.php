@@ -19,33 +19,6 @@
     </nav>
 @endsection
 
-{{-- @section('container')
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-8">
-                <h1>Content Kind / {{ $data }}</h1>
-                <button class="btn btn-primary" onClick="create('{{ $data }}','{{ $id }}')">+ Add
-                    Content</button>
-                <div id="read" class="mt-3"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="page" class="p-2"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection --}}
-
 @section('container')
     <div class="container-fluid mt--6">
         <div class="row">
@@ -105,44 +78,6 @@
                 $("#exampleModalLabel").html('Add User')
                 $("#page").html(data);
                 $("#exampleModal").modal('show');
-                // var editor = new FroalaEditor('textarea');
-                // var toolbarOptions = [
-                //     ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-                //     ['blockquote', 'code-block', 'image'],
-
-                //     [{
-                //         'header': 1
-                //     }, {
-                //         'header': 2
-                //     }], // custom button values
-                //     [{
-                //         'list': 'ordered'
-                //     }, {
-                //         'list': 'bullet'
-                //     }],
-                //     [{
-                //         'script': 'sub'
-                //     }, {
-                //         'script': 'super'
-                //     }], // superscript/subscript
-                //     [{
-                //         'indent': '-1'
-                //     }, {
-                //         'indent': '+1'
-                //     }], // outdent/indent
-                //     [{
-                //         'direction': 'rtl'
-                //     }], // text direction
-
-                //     ['clean'] // remove formatting button
-                // ];
-
-                // var quill = new Quill('#editor', {
-                //     modules: {
-                //         toolbar: toolbarOptions
-                //     },
-                //     theme: 'snow'
-                // });
             });
         }
 
