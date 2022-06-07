@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/update/{id}', [UserController::class, 'update']);
     Route::get('/admin/destroy/{id}', [UserController::class, 'destroy']);
     /* Route::get('/admin/edit/{id}', [UserController::class, 'show']); */
+    Route::get('/admin/admin_contentKind/', [ContentKindController::class, 'admin_content_kind']);
+    Route::get('/admin/admin_contentKind/read', [ContentKindController::class, 'read_admin_content_kind']);
 
     //Route for user
     Route::get('/user/home', [ContentKindController::class, 'home']);

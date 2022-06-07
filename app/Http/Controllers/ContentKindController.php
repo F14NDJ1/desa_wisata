@@ -176,4 +176,56 @@ class ContentKindController extends Controller
             return redirect('/admin/home');
         }
     }
+
+    public function admin_content_kind()
+    {
+        if (request()->user()->hasRole('Admin')) {
+            return view('/admin/content_kind');
+        } else {
+            return redirect('/user/home');
+        }
+    }
+
+    public function read_admin_content_kind()
+    {
+
+        // SELECT * from (
+
+        //     SELECT users.id, users.name,
+        //             COUNT(DISTINCT content_kinds.id) AS content_kind_count
+        //             ,COUNT(DISTINCT contents.id) AS content_count
+        //             FROM users
+        //             left JOIN content_kinds ON content_kinds.user_id = users.id
+        //             left JOIN contents ON contents.user_id = users.id
+        //             GROUP BY users.id) as a
+
+        //             left JOIN
+
+        //             (SELECT users.id, roles.name as name_role FROM role_users join users on role_users.user_id = users.id JOIN roles on role_users.role_id = roles.id GROUP BY users.id) as b
+        //              on a.id = b.id
+        //              where name_role = 'User Content';
+
+        if (request()->user()->hasRole('Admin')) {
+            $data =  DB::table('users')
+                ->select(
+                    'users.id as id',
+                    'users.name as name',
+                    DB::raw(
+                        "COUNT(DISTINCT content_kinds.id) AS content_kind_count,
+                     COUNT(DISTINCT contents.id) AS content_count"
+                    )
+                )
+                ->leftJoin('content_kinds', 'content_kinds.user_id', '=', 'users.id')
+                ->leftJoin('contents', 'contents.user_id', '=', 'users.id')
+                ->groupBy('name', 'id')
+                ->orderBy('id')
+                ->get();
+
+            return view('/admin/read_content_kind')->with([
+                'data' => $data
+            ]);
+        } else {
+            return redirect('/user/home');
+        }
+    }
 }

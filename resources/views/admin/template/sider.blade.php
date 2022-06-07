@@ -28,14 +28,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/contentKind/content_kind_list">
+                        <a class="nav-link" href="/admin/admin_contentKind">
                             <i class="ni ni-collection text-pink"></i>
                             <span class="nav-link-text">Content Kind</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/user_list"">
-                            <i class="ni ni-collection text-pink"></i>
+                            <i class=" ni ni-collection text-pink"></i>
                             <span class="nav-link-text">User List</span>
                         </a>
                     </li>
