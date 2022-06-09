@@ -2,7 +2,7 @@
 
 
 <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLongTitle">Form Input Content Kind</h5>
+    <h5 class="modal-title" id="exampleModalLongTitle">Form Input Content</h5>
     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>

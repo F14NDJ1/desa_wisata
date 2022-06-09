@@ -20,7 +20,6 @@ class ContentController extends Controller
         }
     }
 
-    // Problem, belum bisa mengambil id content kind
     public function read($content, $id)
     {
         if (request()->user()->hasRole('User Content')) {
@@ -109,6 +108,18 @@ class ContentController extends Controller
         if (request()->user()->hasRole('User Content')) {
             $data = Content::findOrFail($id);
             $data->delete();
+        } else {
+            return redirect('/admin/home');
+        }
+    }
+
+    public function priview($content, $id)
+    {
+        if (request()->user()->hasRole('User Content')) {
+            $data = Content::findOrFail($id);
+            return view('/user/content/priview')->with([
+                'data' => $data,
+            ]);
         } else {
             return redirect('/admin/home');
         }

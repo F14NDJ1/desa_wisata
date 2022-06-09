@@ -68,9 +68,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/user/contentKind/show/{content_kind}/{id}', [ContentController::class, 'show']);
     Route::post('/user/contentKind/update/{content_kind_id}/{id}', [ContentController::class, 'update']);
     Route::get('/user/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'destroy']);
+    Route::get('/user/contentKind/priview/{content_kind_id}/{id}', [ContentController::class, 'priview']);
 });
 
 Route::get('/tes', function () {
     return view('editor');
 });
 Route::post('/store/image', [ImageController::class, 'store']);
+
+Route::get('/admin/contentKind/read/{id}', [ContentKindController::class, 'admin_detail_cntn_kind']);
+
+Route::get('/admin/{name_kind}/{id}', [ContentKindController::class, 'admin_view_cntn']);
+
+Route::get('/admin/contentKind/show/{id}', [ContentKindController::class, 'admin_show_cntn']);
+
+Route::post('/admin/contentKind/update/{id}', [ContentKindController::class, 'admin_update_cntn']);
+
+Route::get('/admin/contentKind/destroy/{id}', [ContentKindController::class, 'admin_destroy_cntn']);

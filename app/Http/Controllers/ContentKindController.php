@@ -30,6 +30,7 @@ class ContentKindController extends Controller
             return redirect('/admin/home');
         }
     }
+
     public function content_kind_list()
     {
         if (request()->user()->hasRole('User Content')) {
@@ -116,16 +117,6 @@ class ContentKindController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -204,28 +195,80 @@ class ContentKindController extends Controller
         //             (SELECT users.id, roles.name as name_role FROM role_users join users on role_users.user_id = users.id JOIN roles on role_users.role_id = roles.id GROUP BY users.id) as b
         //              on a.id = b.id
         //              where name_role = 'User Content';
+        // $data =  DB::table('users')
+        //         ->select(
+        //             'users.id as id',
+        //             'users.name as name',
+        //             DB::raw(
+        //                 "COUNT(DISTINCT content_kinds.id) AS content_kind_count,
+        //              COUNT(DISTINCT contents.id) AS content_count"
+        //             )
+        //         )
+        //         ->leftJoin('content_kinds', 'content_kinds.user_id', '=', 'users.id')
+        //         ->leftJoin('contents', 'contents.user_id', '=', 'users.id')
+        //         ->groupBy('name', 'id')
+        //         ->orderBy('id')
+        //         ->get();
 
         if (request()->user()->hasRole('Admin')) {
-            $data =  DB::table('users')
-                ->select(
-                    'users.id as id',
-                    'users.name as name',
-                    DB::raw(
-                        "COUNT(DISTINCT content_kinds.id) AS content_kind_count,
-                     COUNT(DISTINCT contents.id) AS content_count"
-                    )
-                )
-                ->leftJoin('content_kinds', 'content_kinds.user_id', '=', 'users.id')
-                ->leftJoin('contents', 'contents.user_id', '=', 'users.id')
-                ->groupBy('name', 'id')
-                ->orderBy('id')
-                ->get();
 
+            $data = DB::table('users')
+                ->join('content_kinds', 'content_kinds.user_id', '=', 'users.id')
+                ->get();
             return view('/admin/read_content_kind')->with([
                 'data' => $data
             ]);
         } else {
             return redirect('/user/home');
         }
+    }
+
+    // public function admin_detail_cntn_kind($id)
+    // {
+
+    //     $data = Content_kind::where('user_id', $id)->get();
+    //     // dd($data);
+    //     return view('/user/contentKind/read')->with([
+    //         'data' => $data
+    //     ]);
+    // }
+
+    public function admin_view_cntn($kind, $id)
+    {
+        $data = Content::where('content_kind_id', '=', $id)->get();
+        //$data = DB::table('contents')->where('content_kind_id', '=', 100)->get();
+
+        return view('/user/content/read')->with([
+            'data' => $data,
+            'kind' => $kind
+        ]);
+    }
+
+    public function admin_show_cntn($id)
+    {
+        $data = Content_kind::findOrFail($id);
+        return view('/user/contentKind/edit')->with([
+            'data' => $data,
+        ]);
+    }
+
+    public function admin_update_cntn(Request $request, $id)
+    {
+        $request->validate([
+            'name_content_kind' => ['required', 'string', 'max:255'],
+            'detail_content_kind' => ['required', 'string', 'max:255'],
+
+        ]);
+
+        $data = Content_kind::findOrFail($id);
+        $data->name_content_kind = $request->name_content_kind;
+        $data->detail_content_kind = $request->detail_content_kind;
+        $data->save();
+    }
+
+    public function admin_destroy_cntn($id)
+    {
+        $data = Content_kind::findOrFail($id);
+        $data->delete();
     }
 }

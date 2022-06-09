@@ -26,15 +26,14 @@
         color: #ffff;
         border: #ffff
     }
-
 </style>
 <div class="table-responsive mb-3">
     <table id="myTable" class="display table align-items-center table-dark table-flush">
         <thead class="thead-dark">
             <tr>
-                <th>Name</th>
                 <th>Content Kind</th>
-                <th>Content</th>
+                <th>Detail</th>
+                <th>Name</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -43,10 +42,18 @@
                 <tr>
 
                     <td class="text-white">{{ $item->name }}</td>
-                    <td class="text-white">{{ $item->content_kind_count }}</td>
-                    <td class="text-white">{{ $item->content_count }}</td>
+                    <td class="text-white">{{ $item->name_content_kind }}</td>
+                    <td class="text-white">{{ $item->detail_content_kind }}</td>
                     <td>
-                        <button class="btn btn-warning" onClick="show('{{ $item->id }}')">View</button>
+                        {{-- <a class="text-white" href="{{ $item->name_content_kind }}/{{ $item->id }}"><button
+                                class="btn btn-info mr-2">View
+                            </button></a> --}}
+                        <button class="btn btn-info"
+                            onClick="view('{{ $item->name_content_kind }}/{{ $item->id }}')">View</button>
+
+                        <button class="btn btn-warning" onClick="admin_show('{{ $item->id }}')">Edit</button>
+                        <button class="btn btn-danger"
+                            onClick="admin_destroy('{{ $item->name_content_kind }}','{{ $item->id }}')">Delete</button>
                     </td>
                 </tr>
             @endforeach

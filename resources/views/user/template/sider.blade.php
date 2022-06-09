@@ -30,7 +30,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/user/contentKind/content_kind_list">
                             <i class="ni ni-collection text-pink"></i>
-                            <span class="nav-link-text">Content Kind</span>
+                            <span class="nav-link-text">Content Kind & Content</span>
                         </a>
                     </li>
                 </ul>

@@ -123,5 +123,14 @@
             }
 
         }
+
+        function priview(contentKind, id) {
+            debugger;
+            $.get("{{ url('/user/contentKind/priview') }}/" + contentKind + "/" + id, {}, function(data, status) {
+                $("#exampleModalLabel").html('Edit Content Kind')
+                $("#page").html(data);
+                $("#exampleModal").modal('show');
+            });
+        }
     </script>
 @endsection
