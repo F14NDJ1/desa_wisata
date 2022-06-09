@@ -176,5 +176,57 @@
                     });
                 }
             }
+
+            function priview(contentKind, id) {
+                debugger;
+                $.get("{{ url('/admin/contentKind/priview') }}/" + contentKind + "/" + id, {}, function(data, status) {
+                    $("#exampleModalLabel").html('Edit Content Kind')
+                    $("#page").html(data);
+                    $("#exampleModal").modal('show');
+                });
+            }
+
+            function show(contentKind, id) {
+                $.get("{{ url('/admin/contentKind/show') }}/" + contentKind + "/" + id, {}, function(data, status) {
+                    $("#exampleModalLabel").html('Edit Content Kind')
+                    $("#page").html(data);
+                    $("#exampleModal").modal('show');
+                });
+            }
+
+            function destroy(contentKind_id, id) {
+                // debugger;
+                var result = confirm("Want to delete?");
+                if (result) {
+                    $.ajax({
+                        type: "get",
+                        url: "{{ url('/admin/contentKind/destroy') }}/" + contentKind_id + "/" + id,
+                        success: function(data) {
+                            $(".btn-close").click();
+                            read();
+                            Command: toastr["error"]("Content Success Deleted !", "Delete Content")
+
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                        }
+                    });
+                }
+
+            }
         </script>
     @endsection

@@ -133,4 +133,30 @@ class ContentController extends Controller
             return redirect('/admin/home');
         }
     }
+
+    public function admin_priview($content, $id)
+    {
+
+        $data = Content::findOrFail($id);
+        return view('/user/content/priview')->with([
+            'data' => $data,
+        ]);
+    }
+
+    public function admin_show($content_kind_id, $id)
+    {
+
+        $data = Content::findOrFail($id);
+        return view('/user/content/edit')->with([
+            'data' => $data,
+        ]);
+    }
+
+    public function admin_destroy($content_kind_id, $id)
+    {
+        if (request()->user()->hasRole('User Content')) {
+            $data = Content::findOrFail($id);
+            $data->delete();
+        }
+    }
 }

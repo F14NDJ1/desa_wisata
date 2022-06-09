@@ -85,3 +85,9 @@ Route::get('/admin/contentKind/show/{id}', [ContentKindController::class, 'admin
 Route::post('/admin/contentKind/update/{id}', [ContentKindController::class, 'admin_update_cntn']);
 
 Route::get('/admin/contentKind/destroy/{id}', [ContentKindController::class, 'admin_destroy_cntn']);
+
+Route::get('/admin/contentKind/priview/{content_kind_id}/{id}', [ContentController::class, 'admin_priview']);
+
+Route::get('/admin/contentKind/show/{content_kind}/{id}', [ContentController::class, 'admin_show']);
+
+Route::get('/aadmin/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'admin_destroy']);

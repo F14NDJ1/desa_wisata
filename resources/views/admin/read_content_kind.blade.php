@@ -40,10 +40,9 @@
         <tbody class="list">
             @foreach ($data as $item)
                 <tr>
-
-                    <td class="text-white">{{ $item->name }}</td>
                     <td class="text-white">{{ $item->name_content_kind }}</td>
                     <td class="text-white">{{ $item->detail_content_kind }}</td>
+                    <td class="text-white">{{ $item->name }}</td>
                     <td>
                         {{-- <a class="text-white" href="{{ $item->name_content_kind }}/{{ $item->id }}"><button
                                 class="btn btn-info mr-2">View
