@@ -24,8 +24,8 @@
                     <div class="col-lg-12">
                         <div class="row mt-4">
                             <div class="col text-left">
-                                <h1 class="text-white mt-2 d-inline">Content Kind and Content</h1>
-                                @yield('button')
+                                <h1 class="text-white mt-2 d-inline">Content Kind & Content</h1>
+                                <div id="button" class="d-inline"></div>
                             </div>
                         </div>
                         <hr class="my-3">
@@ -64,6 +64,9 @@
             });
             // Read Database
             function read() {
+                let button =
+                    "<button type = \"button\" class=\"ml-4 align-items-center btn btn-primary d-inline\" onClick = \"createKind()\" > +Add Content Kind </button>";
+
                 $.get("{{ url('/admin/admin_contentKind/read') }}", {}, function(data, status) {
                     $.ajaxSetup({
                         headers: {
@@ -71,10 +74,21 @@
                         }
                     });
                     $("#read").html(data);
+                    $("#button").html(button)
+                });
+            }
+
+            function createKind() {
+                $.get("{{ url('/admin/admin_contentKind/create/kind') }}", {}, function(data, status) {
+                    $("#exampleModalLabel").html('Add User')
+                    $("#page").html(data);
+                    $("#exampleModal").modal('show');
                 });
             }
 
             function view(kind, id) {
+                let button =
+                    "<button type = \"button\" class=\"ml-4 align-items-center btn btn-primary d-inline\" onClick = \"create('{{ $data }}','{{ $id }}')\" > +Add Content </button>";
                 $.get("{{ url('/admin') }}/" + kind + "/", {}, function(data, status) {
                     $.ajaxSetup({
                         headers: {
@@ -82,6 +96,15 @@
                         }
                     });
                     $("#read").html(data);
+                    $("#button").html(button)
+                });
+            }
+
+            function create(contentKind, id) {
+                $.get("{{ url('/admin/contentKind/create') }}/" + contentKind + "/" + id, {}, function(data, status) {
+                    $("#exampleModalLabel").html('Add User')
+                    $("#pageContent").html(data);
+                    $("#exampleModalContent").modal('show');
                 });
             }
 
@@ -237,6 +260,49 @@
                     });
                 }
 
+            }
+
+            function store() {
+                var name_content_kind = $("#name_content_kind").val();
+                var detail_content_kind = $("#detail_content_kind").val();
+                var user_id = $("#user_id").val();
+                debugger;
+                $.ajax({
+                    type: "post",
+                    url: "{{ url('/admin/contentKind/store') }}",
+                    data: {
+                        "name_content_kind": name_content_kind,
+                        "detail_content_kind": detail_content_kind,
+                        "user_id": user_id,
+                    },
+                    success: function(data) {
+                        $(".close").click();
+                        read();
+                        Command: toastr["success"]("Content Kind Success Added !", "Add Content Kind")
+
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+
+                    },
+                    /* error: function(xhr, status, error) {
+                        alert("Error!" + xhr.status + " " + error);
+                    }, */
+                });
             }
         </script>
     @endsection

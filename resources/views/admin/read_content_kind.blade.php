@@ -28,7 +28,7 @@
     }
 </style>
 
-@section('button')
+@section('a')
     <button type="button" class="ml-4 align-items-center btn btn-primary d-inline" onClick="create()">+ Add
         Content
         Kind</button>
@@ -41,7 +41,7 @@
                 <th>Content Kind</th>
                 <th>Detail</th>
                 <th>Name</th>
-                <th scope="col">Action</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody class="list">
@@ -50,7 +50,7 @@
                     <td class="text-white">{{ $item->name_content_kind }}</td>
                     <td class="text-white">{{ $item->detail_content_kind }}</td>
                     <td class="text-white">{{ $item->name }}</td>
-                    <td>
+                    <td class="text-center">
                         {{-- <a class="text-white" href="{{ $item->name_content_kind }}/{{ $item->id }}"><button
                                 class="btn btn-info mr-2">View
                             </button></a> --}}

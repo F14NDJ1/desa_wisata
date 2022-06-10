@@ -17,14 +17,18 @@ class ContentKindController extends Controller
      */
     public function home()
     {
-        if (request()->user()->hasRole('User Content')) {
+        if (
+            request()
+                ->user()
+                ->hasRole('User Content')
+        ) {
             $id = Auth::id();
             $data = Content_kind::where('user_id', $id)->count();
             $data1 = Content::where('user_id', $id)->count();
 
             return view('/user/home')->with([
                 'data' => $data,
-                'data1' => $data1
+                'data1' => $data1,
             ]);
         } else {
             return redirect('/admin/home');
@@ -33,7 +37,11 @@ class ContentKindController extends Controller
 
     public function content_kind_list()
     {
-        if (request()->user()->hasRole('User Content')) {
+        if (
+            request()
+                ->user()
+                ->hasRole('User Content')
+        ) {
             return view('/user/contentKind/content_kind_list');
         } else {
             return redirect('/admin/home');
@@ -42,9 +50,11 @@ class ContentKindController extends Controller
 
     public function read()
     {
-        if (request()->user()->hasRole('User Content')) {
-
-
+        if (
+            request()
+                ->user()
+                ->hasRole('User Content')
+        ) {
             // $content_kind = DB::table('contents')
             //     ->join('users', 2, '=', 'users.user_id')
             //     ->join('content_kind', 'contents.user_id', '=', 'content_kinds.id')
@@ -54,7 +64,7 @@ class ContentKindController extends Controller
             $data = Content_kind::where('user_id', $id)->get();
             // dd($data);
             return view('/user/contentKind/read')->with([
-                'data' => $data
+                'data' => $data,
             ]);
         } else {
             return redirect('/admin/home');
@@ -68,7 +78,11 @@ class ContentKindController extends Controller
      */
     public function create()
     {
-        if (request()->user()->hasRole('User Content')) {
+        if (
+            request()
+                ->user()
+                ->hasRole('User Content')
+        ) {
             return view('/user/contentKind/create');
         } else {
             return redirect('/admin/home');
@@ -83,7 +97,11 @@ class ContentKindController extends Controller
      */
     public function store(Request $request)
     {
-        if (request()->user()->hasRole('User Content')) {
+        if (
+            request()
+                ->user()
+                ->hasRole('User Content')
+        ) {
             $request->validate([
                 'name_content_kind' => ['required', 'string', 'max:255'],
                 'detail_content_kind' => ['required', 'string', 'max:255'],
@@ -91,7 +109,7 @@ class ContentKindController extends Controller
             Content_kind::create([
                 'name_content_kind' => $request->name_content_kind,
                 'detail_content_kind' => $request->detail_content_kind,
-                'user_id' => $request->user_id
+                'user_id' => $request->user_id,
             ]);
         } else {
             return redirect('/admin/home')->with('alert', 'updated');
@@ -106,7 +124,11 @@ class ContentKindController extends Controller
      */
     public function show($id)
     {
-        if (request()->user()->hasRole('User Content')) {
+        if (
+            request()
+                ->user()
+                ->hasRole('User Content')
+        ) {
             $data = Content_kind::findOrFail($id);
             return view('/user/contentKind/edit')->with([
                 'data' => $data,
@@ -125,11 +147,14 @@ class ContentKindController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (request()->user()->hasRole('User Content')) {
+        if (
+            request()
+                ->user()
+                ->hasRole('User Content')
+        ) {
             $request->validate([
                 'name_content_kind' => ['required', 'string', 'max:255'],
                 'detail_content_kind' => ['required', 'string', 'max:255'],
-
             ]);
 
             $data = Content_kind::findOrFail($id);
@@ -149,7 +174,11 @@ class ContentKindController extends Controller
      */
     public function destroy($id)
     {
-        if (request()->user()->hasRole('User Content')) {
+        if (
+            request()
+                ->user()
+                ->hasRole('User Content')
+        ) {
             $data = Content_kind::findOrFail($id);
             $data->delete();
         } else {
@@ -159,7 +188,11 @@ class ContentKindController extends Controller
 
     public function content($content_kind)
     {
-        if (request()->user()->hasRole('User Content')) {
+        if (
+            request()
+                ->user()
+                ->hasRole('User Content')
+        ) {
             return view('/user/content/content_list')->with([
                 'data' => $content_kind,
             ]);
@@ -170,7 +203,11 @@ class ContentKindController extends Controller
 
     public function admin_content_kind()
     {
-        if (request()->user()->hasRole('Admin')) {
+        if (
+            request()
+                ->user()
+                ->hasRole('Admin')
+        ) {
             return view('/admin/content_kind');
         } else {
             return redirect('/user/home');
@@ -179,7 +216,6 @@ class ContentKindController extends Controller
 
     public function read_admin_content_kind()
     {
-
         // SELECT * from (
 
         //     SELECT users.id, users.name,
@@ -210,13 +246,16 @@ class ContentKindController extends Controller
         //         ->orderBy('id')
         //         ->get();
 
-        if (request()->user()->hasRole('Admin')) {
-
+        if (
+            request()
+                ->user()
+                ->hasRole('Admin')
+        ) {
             $data = DB::table('users')
                 ->join('content_kinds', 'content_kinds.user_id', '=', 'users.id')
                 ->get();
             return view('/admin/read_content_kind')->with([
-                'data' => $data
+                'data' => $data,
             ]);
         } else {
             return redirect('/user/home');
@@ -240,7 +279,7 @@ class ContentKindController extends Controller
 
         return view('/user/content/read')->with([
             'data' => $data,
-            'kind' => $kind
+            'kind' => $kind,
         ]);
     }
 
@@ -257,7 +296,6 @@ class ContentKindController extends Controller
         $request->validate([
             'name_content_kind' => ['required', 'string', 'max:255'],
             'detail_content_kind' => ['required', 'string', 'max:255'],
-
         ]);
 
         $data = Content_kind::findOrFail($id);
@@ -270,5 +308,23 @@ class ContentKindController extends Controller
     {
         $data = Content_kind::findOrFail($id);
         $data->delete();
+    }
+
+    public function admin_create_kind()
+    {
+        return view('/user/contentKind/create');
+    }
+
+    public function admin_store_kind(Request $request)
+    {
+        $request->validate([
+            'name_content_kind' => ['required', 'string', 'max:255'],
+            'detail_content_kind' => ['required', 'string', 'max:255'],
+        ]);
+        Content_kind::create([
+            'name_content_kind' => $request->name_content_kind,
+            'detail_content_kind' => $request->detail_content_kind,
+            'user_id' => $request->user_id,
+        ]);
     }
 }

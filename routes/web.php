@@ -24,7 +24,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 require __DIR__ . '/auth.php';
 
@@ -90,4 +92,10 @@ Route::get('/admin/contentKind/priview/{content_kind_id}/{id}', [ContentControll
 
 Route::get('/admin/contentKind/show/{content_kind}/{id}', [ContentController::class, 'admin_show']);
 
-Route::get('/aadmin/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'admin_destroy']);
+Route::get('/admin/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'admin_destroy']);
+
+Route::get('/admin/admin_contentKind/create/kind', [ContentKindController::class, 'admin_create_kind']);
+
+Route::post('/admin/contentKind/store', [ContentKindController::class, 'admin_store_kind']);
+
+Route::get('/admin/contentKind/create/{content_kind}/{id}', [ContentController::class, 'admin_create_content']);
