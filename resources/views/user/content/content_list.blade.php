@@ -41,11 +41,11 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    <div class="modal fade" id="exampleModalContent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div id="page" class="p-2"></div>
+                <div id="pageContent" class="p-2"></div>
             </div>
         </div>
     </div>
@@ -76,16 +76,16 @@
         function create(contentKind, id) {
             $.get("{{ url('/user/contentKind/create') }}/" + contentKind + "/" + id, {}, function(data, status) {
                 $("#exampleModalLabel").html('Add User')
-                $("#page").html(data);
-                $("#exampleModal").modal('show');
+                $("#pageContent").html(data);
+                $("#exampleModalContent").modal('show');
             });
         }
 
         function show(contentKind, id) {
             $.get("{{ url('/user/contentKind/show') }}/" + contentKind + "/" + id, {}, function(data, status) {
                 $("#exampleModalLabel").html('Edit Content Kind')
-                $("#page").html(data);
-                $("#exampleModal").modal('show');
+                $("#pageContent").html(data);
+                $("#exampleModalContent").modal('show');
             });
         }
 
@@ -128,8 +128,8 @@
             debugger;
             $.get("{{ url('/user/contentKind/priview') }}/" + contentKind + "/" + id, {}, function(data, status) {
                 $("#exampleModalLabel").html('Edit Content Kind')
-                $("#page").html(data);
-                $("#exampleModal").modal('show');
+                $("#pageContent").html(data);
+                $("#exampleModalContent").modal('show');
             });
         }
     </script>

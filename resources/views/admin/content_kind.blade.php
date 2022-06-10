@@ -25,6 +25,7 @@
                         <div class="row mt-4">
                             <div class="col text-left">
                                 <h1 class="text-white mt-2 d-inline">Content Kind and Content</h1>
+                                @yield('button')
                             </div>
                         </div>
                         <hr class="my-3">
@@ -39,6 +40,15 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div id="page" class="p-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModalContent" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div id="pageContent" class="p-2"></div>
                 </div>
             </div>
         </div>
@@ -181,16 +191,16 @@
                 debugger;
                 $.get("{{ url('/admin/contentKind/priview') }}/" + contentKind + "/" + id, {}, function(data, status) {
                     $("#exampleModalLabel").html('Edit Content Kind')
-                    $("#page").html(data);
-                    $("#exampleModal").modal('show');
+                    $("#pageContent").html(data);
+                    $("#exampleModalContent").modal('show');
                 });
             }
 
             function show(contentKind, id) {
                 $.get("{{ url('/admin/contentKind/show') }}/" + contentKind + "/" + id, {}, function(data, status) {
                     $("#exampleModalLabel").html('Edit Content Kind')
-                    $("#page").html(data);
-                    $("#exampleModal").modal('show');
+                    $("#pageContent").html(data);
+                    $("#exampleModalContent").modal('show');
                 });
             }
 

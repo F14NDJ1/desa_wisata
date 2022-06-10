@@ -27,6 +27,13 @@
         border: #ffff
     }
 </style>
+
+@section('button')
+    <button type="button" class="ml-4 align-items-center btn btn-primary d-inline" onClick="create()">+ Add
+        Content
+        Kind</button>
+@endsection
+
 <div class="table-responsive mb-3">
     <table id="myTable" class="display table align-items-center table-dark table-flush">
         <thead class="thead-dark">
