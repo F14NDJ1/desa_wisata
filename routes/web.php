@@ -99,3 +99,5 @@ Route::get('/admin/admin_contentKind/create/kind', [ContentKindController::class
 Route::post('/admin/contentKind/store', [ContentKindController::class, 'admin_store_kind']);
 
 Route::get('/admin/contentKind/create/{content_kind}/{id}', [ContentController::class, 'admin_create_content']);
+
+Route::get('/admin/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'destroy']);

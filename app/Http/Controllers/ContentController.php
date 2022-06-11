@@ -94,7 +94,8 @@ class ContentController extends Controller
     public function update(Request $request, $name, $id)
     {
         if (
-            request()->user()->hasRole('User Content')
+            request()->user()->hasRole('User Content') ||
+            request()->user()->hasRole('Admin')
         ) {
             $data = Content::findOrFail($id);
             $data->name_content = $request->name_content;
@@ -115,7 +116,8 @@ class ContentController extends Controller
     public function destroy($content_kind_id, $id)
     {
         if (
-            request()->user()->hasRole('User Content')
+            request()->user()->hasRole('User Content') ||
+            request()->user()->hasRole('Admin')
         ) {
             $data = Content::findOrFail($id);
             $data->delete();
