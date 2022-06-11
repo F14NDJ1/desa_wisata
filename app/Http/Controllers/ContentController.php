@@ -11,9 +11,7 @@ class ContentController extends Controller
     public function content($content_kind, $content_kind_id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             return view('/user/content/content_list')->with([
                 'data' => $content_kind,
@@ -27,9 +25,7 @@ class ContentController extends Controller
     public function read($content, $id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             //$id = $request->id;
             //dd($id);
@@ -47,9 +43,7 @@ class ContentController extends Controller
     public function create($content_kind, $content_kind_id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             return view('/user/content/create')->with([
                 'data' => $content_kind,
@@ -63,12 +57,8 @@ class ContentController extends Controller
     public function store(Request $request)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content') ||
-            request()
-                ->user()
-                ->hasRole('Admin')
+            request()->user()->hasRole('User Content') ||
+            request()->user()->hasRole('Admin')
         ) {
             $imageName = time() . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('images'), $imageName);
@@ -90,9 +80,7 @@ class ContentController extends Controller
     public function show($content_kind_id, $id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $data = Content::findOrFail($id);
             return view('/user/content/edit')->with([
@@ -106,9 +94,7 @@ class ContentController extends Controller
     public function update(Request $request, $name, $id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $data = Content::findOrFail($id);
             $data->name_content = $request->name_content;
@@ -129,9 +115,7 @@ class ContentController extends Controller
     public function destroy($content_kind_id, $id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $data = Content::findOrFail($id);
             $data->delete();
@@ -143,13 +127,13 @@ class ContentController extends Controller
     public function priview($content, $id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $data = Content::findOrFail($id);
             return view('/user/content/priview')->with([
                 'data' => $data,
+                'kind' => $content,
+                'id' => $id,
             ]);
         } else {
             return redirect('/admin/home');
@@ -159,9 +143,7 @@ class ContentController extends Controller
     public function detail_input()
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
         } else {
             return redirect('/admin/home');
@@ -187,9 +169,7 @@ class ContentController extends Controller
     public function admin_destroy($content_kind_id, $id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $data = Content::findOrFail($id);
             $data->delete();

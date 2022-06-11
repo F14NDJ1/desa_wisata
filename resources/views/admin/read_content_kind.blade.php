@@ -28,12 +28,6 @@
     }
 </style>
 
-@section('a')
-    <button type="button" class="ml-4 align-items-center btn btn-primary d-inline" onClick="create()">+ Add
-        Content
-        Kind</button>
-@endsection
-
 <div class="table-responsive mb-3">
     <table id="myTable" class="display table align-items-center table-dark table-flush">
         <thead class="thead-dark">
@@ -55,7 +49,7 @@
                                 class="btn btn-info mr-2">View
                             </button></a> --}}
                         <button class="btn btn-info"
-                            onClick="view('{{ $item->name_content_kind }}/{{ $item->id }}')">View</button>
+                            onClick="view('{{ $item->name_content_kind }}','{{ $item->id }}')">View</button>
 
                         <button class="btn btn-warning" onClick="admin_show('{{ $item->id }}')">Edit</button>
                         <button class="btn btn-danger"
@@ -72,4 +66,19 @@
         $('#myTable').DataTable();
 
     });
+
+    // function view(kind, id) {
+    //     let button =
+    //         "<button type = \"button\" class=\"ml-4 align-items-center btn btn-primary d-inline\" onClick = \"create('{{ $item->name_content_kind }}', '{{ $item->id }}')\" > +Add Content </button>";
+    //     debugger;
+    //     $.get("{{ url('/admin') }}/" + kind + "/" + id, {}, function(data, status) {
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             }
+    //         });
+    //         $("#read").html(data);
+    //         $("#button").html(button)
+    //     });
+    // }
 </script>

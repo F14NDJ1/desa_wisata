@@ -18,9 +18,7 @@ class ContentKindController extends Controller
     public function home()
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $id = Auth::id();
             $data = Content_kind::where('user_id', $id)->count();
@@ -38,9 +36,7 @@ class ContentKindController extends Controller
     public function content_kind_list()
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             return view('/user/contentKind/content_kind_list');
         } else {
@@ -51,9 +47,7 @@ class ContentKindController extends Controller
     public function read()
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             // $content_kind = DB::table('contents')
             //     ->join('users', 2, '=', 'users.user_id')
@@ -79,9 +73,7 @@ class ContentKindController extends Controller
     public function create()
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             return view('/user/contentKind/create');
         } else {
@@ -98,9 +90,7 @@ class ContentKindController extends Controller
     public function store(Request $request)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $request->validate([
                 'name_content_kind' => ['required', 'string', 'max:255'],
@@ -125,9 +115,7 @@ class ContentKindController extends Controller
     public function show($id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $data = Content_kind::findOrFail($id);
             return view('/user/contentKind/edit')->with([
@@ -148,9 +136,7 @@ class ContentKindController extends Controller
     public function update(Request $request, $id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $request->validate([
                 'name_content_kind' => ['required', 'string', 'max:255'],
@@ -175,9 +161,7 @@ class ContentKindController extends Controller
     public function destroy($id)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             $data = Content_kind::findOrFail($id);
             $data->delete();
@@ -189,9 +173,7 @@ class ContentKindController extends Controller
     public function content($content_kind)
     {
         if (
-            request()
-                ->user()
-                ->hasRole('User Content')
+            request()->user()->hasRole('User Content')
         ) {
             return view('/user/content/content_list')->with([
                 'data' => $content_kind,
@@ -204,9 +186,7 @@ class ContentKindController extends Controller
     public function admin_content_kind()
     {
         if (
-            request()
-                ->user()
-                ->hasRole('Admin')
+            request()->user()->hasRole('Admin')
         ) {
             return view('/admin/content_kind');
         } else {
@@ -216,40 +196,8 @@ class ContentKindController extends Controller
 
     public function read_admin_content_kind()
     {
-        // SELECT * from (
-
-        //     SELECT users.id, users.name,
-        //             COUNT(DISTINCT content_kinds.id) AS content_kind_count
-        //             ,COUNT(DISTINCT contents.id) AS content_count
-        //             FROM users
-        //             left JOIN content_kinds ON content_kinds.user_id = users.id
-        //             left JOIN contents ON contents.user_id = users.id
-        //             GROUP BY users.id) as a
-
-        //             left JOIN
-
-        //             (SELECT users.id, roles.name as name_role FROM role_users join users on role_users.user_id = users.id JOIN roles on role_users.role_id = roles.id GROUP BY users.id) as b
-        //              on a.id = b.id
-        //              where name_role = 'User Content';
-        // $data =  DB::table('users')
-        //         ->select(
-        //             'users.id as id',
-        //             'users.name as name',
-        //             DB::raw(
-        //                 "COUNT(DISTINCT content_kinds.id) AS content_kind_count,
-        //              COUNT(DISTINCT contents.id) AS content_count"
-        //             )
-        //         )
-        //         ->leftJoin('content_kinds', 'content_kinds.user_id', '=', 'users.id')
-        //         ->leftJoin('contents', 'contents.user_id', '=', 'users.id')
-        //         ->groupBy('name', 'id')
-        //         ->orderBy('id')
-        //         ->get();
-
         if (
-            request()
-                ->user()
-                ->hasRole('Admin')
+            request()->user()->hasRole('Admin')
         ) {
             $data = DB::table('users')
                 ->join('content_kinds', 'content_kinds.user_id', '=', 'users.id')
@@ -262,16 +210,6 @@ class ContentKindController extends Controller
         }
     }
 
-    // public function admin_detail_cntn_kind($id)
-    // {
-
-    //     $data = Content_kind::where('user_id', $id)->get();
-    //     // dd($data);
-    //     return view('/user/contentKind/read')->with([
-    //         'data' => $data
-    //     ]);
-    // }
-
     public function admin_view_cntn($kind, $id)
     {
         $data = Content::where('content_kind_id', '=', $id)->get();
@@ -280,6 +218,7 @@ class ContentKindController extends Controller
         return view('/user/content/read')->with([
             'data' => $data,
             'kind' => $kind,
+            'id' => $id
         ]);
     }
 
