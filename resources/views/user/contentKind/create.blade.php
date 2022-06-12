@@ -8,8 +8,18 @@
     <form action="javascript:void(0)" method="post" enctype="multipart/form-data">
         @csrf
         <div class="col-md form-group mt-2">
+            <label for="contentKind" class="form-label">Category</label>
+            <select class="form-control" data-toggle="select" id="category" name="category">
+                <option value="">--Select Category--</option>
+                <option value="About - ">About</option>
+                <option value="Artikel - ">Artikel</option>
+                <option value="Galeri - ">Galeri</option>
+            </select>
+        </div>
+
+        <div class="col-md form-group mt-2">
             <label for="contentKind" class="form-label">Content Kind</label>
-            <input type="text" class="form-control" id="name_content_kind" name="name_content_kind" required autofocus>
+            <input type="text" class="form-control" id="name_content_kind" name="name_content_kind" required>
         </div>
 
         <div class="col-md form-group mt-2">
@@ -24,3 +34,16 @@
         </div>
     </form>
 </div>
+
+<script>
+    function displayVals() {
+        var singleValues = $("#category").val();
+        // When using jQuery 3:
+        // var multipleValues = $( "#multiple" ).val();
+        $("#name_content_kind").val(singleValues);
+    }
+
+
+    $("select").change(displayVals);
+    displayVals();
+</script>

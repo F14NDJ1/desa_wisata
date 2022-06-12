@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules;
+use App\Models\Content_kind;
+use App\Models\Content;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,12 @@ class UserController extends Controller
     public function home()
     {
         if (request()->user()->hasRole('Admin')) {
-            return view('/admin/home');
+            $cntn_kind = Content_kind::count();
+            $cntn = Content::count();
+            return view('/admin/home')->with([
+                'content_kind' => $cntn_kind,
+                'content' => $cntn
+            ]);
         } else {
             return redirect('/user/home');
         }

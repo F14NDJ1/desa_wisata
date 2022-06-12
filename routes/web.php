@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentKindController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,6 @@ use App\Http\Controllers\ImageController;
 | php artisan route:cache = jika controller tidak ditemukan
 | php artisan optimize
 */
-
-Route::get('/', function () {
-    return view('index');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -71,33 +68,42 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/user/contentKind/update/{content_kind_id}/{id}', [ContentController::class, 'update']);
     Route::get('/user/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'destroy']);
     Route::get('/user/contentKind/priview/{content_kind_id}/{id}', [ContentController::class, 'priview']);
+
+    /* Super Admin */
+
+    Route::post('/store/image', [ImageController::class, 'store']);
+
+    Route::get('/admin/contentKind/read/{id}', [ContentKindController::class, 'admin_detail_cntn_kind']);
+
+    Route::get('/admin/{name_kind}/{id}', [ContentKindController::class, 'admin_view_cntn']);
+
+    Route::get('/admin/contentKind/show/{id}', [ContentKindController::class, 'admin_show_cntn']);
+
+    Route::post('/admin/contentKind/update/{id}', [ContentKindController::class, 'admin_update_cntn']);
+
+    Route::get('/admin/contentKind/destroy/{id}', [ContentKindController::class, 'admin_destroy_cntn']);
+
+    Route::get('/admin/contentKind/priview/{content_kind_id}/{id}', [ContentController::class, 'admin_priview']);
+
+    Route::get('/admin/contentKind/show/{content_kind}/{id}', [ContentController::class, 'admin_show']);
+
+    Route::get('/admin/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'admin_destroy']);
+
+    Route::get('/admin/admin_contentKind/create/kind', [ContentKindController::class, 'admin_create_kind']);
+
+    Route::post('/admin/contentKind/store', [ContentKindController::class, 'admin_store_kind']);
+
+    Route::get('/admin/contentKind/create/{content_kind}/{id}', [ContentController::class, 'admin_create_content']);
+
+    Route::get('/admin/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'destroy']);
 });
+
+//Dashboard
+Route::get('/', [DashboardController::class, 'index']);
+Route::get('/about', [DashboardController::class, 'about']);
+Route::get('/artikel', [DashboardController::class, 'artikel']);
+Route::get('/galeri', [DashboardController::class, 'galeri']);
 
 Route::get('/tes', function () {
     return view('editor');
 });
-Route::post('/store/image', [ImageController::class, 'store']);
-
-Route::get('/admin/contentKind/read/{id}', [ContentKindController::class, 'admin_detail_cntn_kind']);
-
-Route::get('/admin/{name_kind}/{id}', [ContentKindController::class, 'admin_view_cntn']);
-
-Route::get('/admin/contentKind/show/{id}', [ContentKindController::class, 'admin_show_cntn']);
-
-Route::post('/admin/contentKind/update/{id}', [ContentKindController::class, 'admin_update_cntn']);
-
-Route::get('/admin/contentKind/destroy/{id}', [ContentKindController::class, 'admin_destroy_cntn']);
-
-Route::get('/admin/contentKind/priview/{content_kind_id}/{id}', [ContentController::class, 'admin_priview']);
-
-Route::get('/admin/contentKind/show/{content_kind}/{id}', [ContentController::class, 'admin_show']);
-
-Route::get('/admin/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'admin_destroy']);
-
-Route::get('/admin/admin_contentKind/create/kind', [ContentKindController::class, 'admin_create_kind']);
-
-Route::post('/admin/contentKind/store', [ContentKindController::class, 'admin_store_kind']);
-
-Route::get('/admin/contentKind/create/{content_kind}/{id}', [ContentController::class, 'admin_create_content']);
-
-Route::get('/admin/contentKind/destroy/{content_kind_id}/{id}', [ContentController::class, 'destroy']);
