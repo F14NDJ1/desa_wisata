@@ -22,6 +22,12 @@ class DashboardController extends Controller
             ->limit(3)
             ->get();
 
+        $Banner = DB::table('content_kinds')
+            ->join('contents', 'contents.content_kind_id', '=', 'content_kinds.id')
+            ->where('content_kinds.name_content_kind', 'like', 'Banner - %')
+            ->limit(3)
+            ->get();
+
         $about = DB::table('content_kinds')
             ->join('contents', 'contents.content_kind_id', '=', 'content_kinds.id')
             ->where('content_kinds.name_content_kind', 'like', 'About - %')
@@ -29,13 +35,16 @@ class DashboardController extends Controller
             ->limit(1)
             ->get();
 
-        foreach ($about as $list) {
-            echo $list->name_content . '<br>';
-        }
+        // foreach ($about as $list) {
+        //     echo $list->name_content . '<br>';
+        // }
 
-        // return view('/index')->with([
-        //     'data' => $lists
-        // ]);
+        return view('/index')->with([
+            'galeri' => $galeri,
+            'artikel' => $artikel,
+            'banner' => $banner,
+            'about' => $about
+        ]);
     }
 
     public function about()

@@ -14,6 +14,7 @@
                 <option value="About - ">About</option>
                 <option value="Artikel - ">Artikel</option>
                 <option value="Galeri - ">Galeri</option>
+                <option value="Banner - ">Banner</option>
             </select>
         </div>
 
