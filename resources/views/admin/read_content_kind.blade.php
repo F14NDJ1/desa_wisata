@@ -66,19 +66,4 @@
         $('#myTable').DataTable();
 
     });
-
-    // function view(kind, id) {
-    //     let button =
-    //         "<button type = \"button\" class=\"ml-4 align-items-center btn btn-primary d-inline\" onClick = \"create('{{ $item->name_content_kind }}', '{{ $item->id }}')\" > +Add Content </button>";
-    //     debugger;
-    //     $.get("{{ url('/admin') }}/" + kind + "/" + id, {}, function(data, status) {
-    //         $.ajaxSetup({
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             }
-    //         });
-    //         $("#read").html(data);
-    //         $("#button").html(button)
-    //     });
-    // }
 </script>

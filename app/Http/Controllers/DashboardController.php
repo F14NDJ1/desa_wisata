@@ -22,7 +22,7 @@ class DashboardController extends Controller
             ->limit(3)
             ->get();
 
-        $Banner = DB::table('content_kinds')
+        $banner = DB::table('content_kinds')
             ->join('contents', 'contents.content_kind_id', '=', 'content_kinds.id')
             ->where('content_kinds.name_content_kind', 'like', 'Banner - %')
             ->limit(3)
