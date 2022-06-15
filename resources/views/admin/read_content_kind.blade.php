@@ -45,9 +45,6 @@
                     <td class="text-white">{{ $item->detail_content_kind }}</td>
                     <td class="text-white">{{ $item->name }}</td>
                     <td class="text-center">
-                        {{-- <a class="text-white" href="{{ $item->name_content_kind }}/{{ $item->id }}"><button
-                                class="btn btn-info mr-2">View
-                            </button></a> --}}
                         <button class="btn btn-info"
                             onClick="view('{{ $item->name_content_kind }}','{{ $item->id }}')">View</button>
 
